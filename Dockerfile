@@ -15,7 +15,7 @@ RUN apk --no-cache \
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
 	PATH=$PATH:${JAVA_HOME}/bin
 
-ADD ./entrypoint.sh /etc/entrypoint.sh
-RUN chmod a+x /etc`/entrypoint.sh
+ADD ./bootstrap.sh /etc/bootstrap.sh
+RUN chmod a+x /etc`/bootstrap.sh
 
 ENTRYPOINT ["/etc/bootstrap.sh"]
