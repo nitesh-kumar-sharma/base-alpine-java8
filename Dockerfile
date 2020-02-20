@@ -14,8 +14,9 @@ RUN apk --no-cache \
 		  
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
 	PATH=$PATH:${JAVA_HOME}/bin
+	
+ADD wait-for-it.sh /etc/wait-for-it.sh
 
-ADD ./bootstrap.sh /etc/bootstrap.sh
-RUN chmod a+x /etc`/bootstrap.sh
+RUN chmod a+x /etc/wait-for-it.sh
 
-ENTRYPOINT ["/etc/bootstrap.sh"]
+ENTRYPOINT ["/etc/wait-for-it.sh"]
