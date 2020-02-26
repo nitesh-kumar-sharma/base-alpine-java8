@@ -1,3 +1,5 @@
+#!/bin/bash
+
 function wait_for_it()
 {
     local serviceport=$1
@@ -5,9 +7,9 @@ function wait_for_it()
     local port=${serviceport#*:}
     local retry_seconds=5
     local max_try=100
-    let i=1
+    ((i=1))
 
-    nc -z $service $port
+    nc -z "$service" "$port"
     result=$?
 
     until [ $result -eq 0 ]; do
@@ -19,18 +21,16 @@ function wait_for_it()
       fi
       
       echo "[$i/$max_try] try in ${retry_seconds}s once again ..."
-      let "i++"
+      (("i++"))
       sleep $retry_seconds
 
-      nc -z $service $port
+      nc -z "$service" "$port"
       result=$?
     done
     echo "[$i/$max_try] $service:${port} is available."
 }
 
-for i in ${SERVICE_PRECONDITION[@]}
+for i in "${WAIT_FOR_SERVICE[@]}"
 do
-    wait_for_it ${i}
-done
-
-exec $@
+    wait_for_it "${i}"
+done;
