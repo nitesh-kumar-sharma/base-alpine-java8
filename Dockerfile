@@ -41,5 +41,4 @@ RUN rm -rf /tmp/* \
 		${JAVA_HOME}/jre/lib/oblique-fonts \
 		${JAVA_HOME}/jre/lib/plugin.jar \
 		/tmp/* /var/cache/apk/*
-CMD ["java -version"]		
-ENTRYPOINT ["/bin/bash"]
+ENTRYPOINT ["java","-version"]
