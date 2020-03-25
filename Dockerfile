@@ -1,19 +1,12 @@
-FROM alpine:3.9
-
+FROM nikush001/base-alpine-linux:1.0
 LABEL MAINTAINER="Nitesh K. Sharma <sharma.nitesh590@gmail.com>"
 
 #******************** Install packages ***************************	
-RUN apk add --no-cache \
-		  bash \
-		  openjdk8-jre
-		  
+RUN apk add bash openjdk8-jre
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
 	PATH=$PATH:${JAVA_HOME}/bin
-	
-ADD wait-for-it.sh /etc/wait-for-it.sh
 
-RUN chmod a+x /etc/wait-for-it.sh \
-	&& rm -rf /tmp/* \
+RUN rm -rf /tmp/* \
 		${HADOOP_HOME}/share/doc/ \
 		${HADOOP_HOME}/src/ \
 		${JAVA_HOME}/*src.zip \
@@ -48,5 +41,5 @@ RUN chmod a+x /etc/wait-for-it.sh \
 		${JAVA_HOME}/jre/lib/oblique-fonts \
 		${JAVA_HOME}/jre/lib/plugin.jar \
 		/tmp/* /var/cache/apk/*
-
-ENTRYPOINT ["/etc/wait-for-it.sh"]
+CMD ["java -version"]		
+ENTRYPOINT ["/bin/bash"]
