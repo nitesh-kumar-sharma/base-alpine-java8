@@ -1,8 +1,8 @@
-FROM nikush001/base-alpine-linux:1.0
+FROM nikush001/base-alpine-linux:3.9
 LABEL MAINTAINER="Nitesh K. Sharma <sharma.nitesh590@gmail.com>"
 
 #******************** Install packages ***************************	
-RUN apk add --no-cache --update bash openjdk8-jre
+RUN apk add --no-cache --update openjdk8-jre
 ENV JAVA_HOME=/usr/lib/jvm/java-1.8-openjdk \
 	PATH=$PATH:${JAVA_HOME}/bin
 
@@ -41,4 +41,5 @@ RUN rm -rf /tmp/* \
 		${JAVA_HOME}/jre/lib/oblique-fonts \
 		${JAVA_HOME}/jre/lib/plugin.jar \
 		/tmp/* /var/cache/apk/*
+		
 ENTRYPOINT ["java","-version"]
